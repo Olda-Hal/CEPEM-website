@@ -1,0 +1,28 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cepem-frontend
+    ports:
+      - "${FRONTEND_PORT:-3001}:4173"
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=production
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL:-http://localhost:8001}
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cepem-backend
+    ports:
+      - "${BACKEND_PORT:-8001}:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - APP_HOST=${APP_HOST:-http://localhost}
+      - CORS_ALLOW_ORIGINS=${CORS_ALLOW_ORIGINS:-http://localhost:3001,http://127.0.0.1:3001}
+      - CORS_ALLOW_METHODS=${CORS_ALLOW_METHODS:-*}
+      - CORS_ALLOW_HEADERS=${CORS_ALLOW_HEADERS:-*}
+      - CORS_ALLOW_CREDENTIALS=${CORS_ALLOW_CREDENTIALS:-true}

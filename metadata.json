@@ -1,0 +1,7 @@
+{
+  "name": "Centra Preventivní Medicíny",
+  "description": "Špičková preventivní péče, moderní diagnostika a individuální přístup k vašemu zdraví.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
