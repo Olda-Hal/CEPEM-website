@@ -24,11 +24,11 @@ export const Contact: React.FC = () => {
       <section className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="rounded-xl bg-slate-50 border border-slate-200 p-6">
           <h2 className="font-bold text-slate-900 mb-2">{t('contact.emailTitle')}</h2>
-          <p className="text-slate-700">info@cpm.cz</p>
+          <p className="text-slate-700">info@premedical.cz</p>
         </div>
         <div className="rounded-xl bg-slate-50 border border-slate-200 p-6">
           <h2 className="font-bold text-slate-900 mb-2">{t('contact.phoneTitle')}</h2>
-          <p className="text-slate-700">+420 123 456 789</p>
+          <p className="text-slate-700">+420 777 745 893 / +420 541 212 028</p>
         </div>
       </section>
     </div>

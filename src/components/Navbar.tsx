@@ -15,6 +15,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onPageChange }) => {
     { id: 'clinics', label: t('nav.clinics') },
     { id: 'reservation', label: t('nav.reservation') },
     { id: 'products', label: t('nav.products') },
+    { id: 'news', label: t('nav.news') },
   ];
 
   return (

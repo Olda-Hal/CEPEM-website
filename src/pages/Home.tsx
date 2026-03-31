@@ -163,7 +163,15 @@ export const Home: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavig
           <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-10">
             {t('home.partnershipDescription')}
           </p>
-          <Button variant="secondary" size="lg">{t('home.partnershipCta')}</Button>
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={() => {
+              window.location.href = 'mailto:info@premedical.cz?subject=Spoluprace%20-%20sit%20klinik';
+            }}
+          >
+            {t('home.partnershipCta')}
+          </Button>
         </div>
       </section>
     </div>

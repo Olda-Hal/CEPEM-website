@@ -9,6 +9,10 @@ import { About } from './pages/About';
 import { Career } from './pages/Career';
 import { Gdpr } from './pages/Gdpr';
 import { Contact } from './pages/Contact';
+import { News } from './pages/News';
+import { NewsLectures } from './pages/NewsLectures';
+import { NewsNetwork } from './pages/NewsNetwork';
+import { NewsEvents } from './pages/NewsEvents';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
@@ -29,6 +33,14 @@ export default function App() {
         return <Reservation />;
       case 'products':
         return <Products />;
+      case 'news':
+        return <News onNavigate={setActivePage} />;
+      case 'news-lectures':
+        return <NewsLectures />;
+      case 'news-network':
+        return <NewsNetwork />;
+      case 'news-events':
+        return <NewsEvents />;
       case 'about':
         return <About />;
       case 'career':

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Cpu, Zap, Database, Activity, Shield, ArrowUpRight, Check, Play, Settings, Download } from 'lucide-react';
+import { Cpu, Zap, Database, Activity, Shield, ArrowUpRight, Check, Settings, Download } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { useI18n } from '../i18n/I18nProvider';
 import { cn } from '@/src/lib/utils';
@@ -26,26 +26,22 @@ export const Products: React.FC = () => {
           <p className="text-slate-600 text-lg md:text-xl leading-relaxed mb-10">
             {t('products.description')}
           </p>
-          <div className="flex justify-center gap-4">
-            <Button size="lg">{t('products.browseAll')}</Button>
-            <Button variant="outline" size="lg">{t('products.technicalSpec')}</Button>
-          </div>
         </motion.div>
       </section>
 
-      {/* Hardware Products Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
+      {/* Services and Devices Grid */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
         <ProductCard 
           image="https://lh3.googleusercontent.com/aida-public/AB6AXuC63_L78O68pP2H6W0-9_Z7Yh_L_9O6FHh3Cj3RCqYEAiZtPbiD8qIdZI1_5vq0ne0wbLv29Zp30JOI6-sOtCgHHjVQp7Ge2Et-5Qgz16zYL-FlZvTEXX1ZaCdWjIyWPSHaEyyG6V9jNZZHaX2mowdjduGmdpUwp7QmnLbVLdjy8yimrD01XmZBIM5Ki_aTza1CuvpUlg3ogtT_1h740TuDpAdeKUzo-q4vaacRpI5-5065lDaxRk05LRstD7N99-gVrUEdXQ5_OW7f0NuhlFOPuSnw"
-          title="NexGen UltraScan V4"
+          title="ANESA"
           category={t('products.products.p1.category')}
           description={t('products.products.p1.description')}
           features={tList('products.products.p1.features')}
           detailsLabel={t('products.products.details')}
         />
         <ProductCard 
-          image="https://lh3.googleusercontent.com/aida-public/AB6AXuCg_bwPcFxBheL_9O6FHh3Cj3RCqYEAiZtPbiD8qIdZI1_5vq0ne0wbLv29Zp30JOI6-sOtCgHHjVQp7Ge2Et-5Qgz16zYL-FlZvTEXX1ZaCdWjIyWPSHaEyyG6V9jNZZHaX2mowdjduGmdpUwp7QmnLbVLdjy8yimrD01XmZBIM5Ki_aTza1CuvpUlg3ogtT_1h740TuDpAdeKUzo-q4vaacRpI5-5065lDaxRk05LRstD7N99-gVrUEdXQ5_OW7f0NuhlFOPuSnw"
-          title="BioSynthetix Lab Core"
+          image="https://lh3.googleusercontent.com/aida-public/AB6AXuBjqLkrawLSq4-3cmdoQzSyAfvmiotLgCUG5HOWxAyZVv26P36N5BMedXLK54A4r8qW-k71pdPlorHoALhu0_hBS1TM8zCmHjAxBm0iaTtIQWNaqViyNrYblfnYX64SuvQKUh0rV2L3vcX7mvyKZY1Y-BPH8LgY_dsUTlCOzUZJNWi_wbLQ8ImFWRcjRLPuFFWw8uNqP1PWwRzDTZfKTO5Fa0ouwhl3QHzPIC14z7CJxZ1ZUfhiSgS4SPfjtlJJSErGZIVrK-rNNYQ"
+          title="MEIK"
           category={t('products.products.p2.category')}
           description={t('products.products.p2.description')}
           features={tList('products.products.p2.features')}
@@ -54,12 +50,52 @@ export const Products: React.FC = () => {
         />
         <ProductCard 
           image="https://lh3.googleusercontent.com/aida-public/AB6AXuBjqLkrawLSq4-3cmdoQzSyAfvmiotLgCUG5HOWxAyZVv26P36N5BMedXLK54A4r8qW-k71pdPlorHoALhu0_hBS1TM8zCmHjAxBm0iaTtIQWNaqViyNrYblfnYX64SuvQKUh0rV2L3vcX7mvyKZY1Y-BPH8LgY_dsUTlCOzUZJNWi_wbLQ8ImFWRcjRLPuFFWw8uNqP1PWwRzDTZfKTO5Fa0ouwhl3QHzPIC14z7CJxZ1ZUfhiSgS4SPfjtlJJSErGZIVrK-rNNYQ"
-          title="VitalFlow Respiration"
+          title="PLASON / NO"
           category={t('products.products.p3.category')}
           description={t('products.products.p3.description')}
           features={tList('products.products.p3.features')}
           detailsLabel={t('products.products.details')}
         />
+      </section>
+
+      <section className="mb-32">
+        <div className="max-w-3xl mb-10">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-[10px] font-bold mb-4 uppercase tracking-widest border border-amber-200">
+            {t('products.supplementsBadge')}
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">{t('products.supplementsTitle')}</h2>
+          <p className="text-slate-600 leading-relaxed">{t('products.supplementsDescription')}</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <ProductCard
+            image="https://lh3.googleusercontent.com/aida-public/AB6AXuC63_L78O68pP2H6W0-9_Z7Yh_L_9O6FHh3Cj3RCqYEAiZtPbiD8qIdZI1_5vq0ne0wbLv29Zp30JOI6-sOtCgHHjVQp7Ge2Et-5Qgz16zYL-FlZvTEXX1ZaCdWjIyWPSHaEyyG6V9jNZZHaX2mowdjduGmdpUwp7QmnLbVLdjy8yimrD01XmZBIM5Ki_aTza1CuvpUlg3ogtT_1h740TuDpAdeKUzo-q4vaacRpI5-5065lDaxRk05LRstD7N99-gVrUEdXQ5_OW7f0NuhlFOPuSnw"
+            title={t('products.supplements.s1Title')}
+            category={t('products.supplementsBadge')}
+            description={t('products.supplements.s1Desc')}
+            features={tList('products.supplements.s1Features')}
+            detailsLabel={t('products.products.details')}
+            accent="teal"
+          />
+          <ProductCard
+            image="https://lh3.googleusercontent.com/aida-public/AB6AXuCg_bwPcFxBheL_9O6FHh3Cj3RCqYEAiZtPbiD8qIdZI1_5vq0ne0wbLv29Zp30JOI6-sOtCgHHjVQp7Ge2Et-5Qgz16zYL-FlZvTEXX1ZaCdWjIyWPSHaEyyG6V9jNZZHaX2mowdjduGmdpUwp7QmnLbVLdjy8yimrD01XmZBIM5Ki_aTza1CuvpUlg3ogtT_1h740TuDpAdeKUzo-q4vaacRpI5-5065lDaxRk05LRstD7N99-gVrUEdXQ5_OW7f0NuhlFOPuSnw"
+            title={t('products.supplements.s2Title')}
+            category={t('products.supplementsBadge')}
+            description={t('products.supplements.s2Desc')}
+            features={tList('products.supplements.s2Features')}
+            detailsLabel={t('products.products.details')}
+            accent="teal"
+          />
+          <ProductCard
+            image="https://lh3.googleusercontent.com/aida-public/AB6AXuBjqLkrawLSq4-3cmdoQzSyAfvmiotLgCUG5HOWxAyZVv26P36N5BMedXLK54A4r8qW-k71pdPlorHoALhu0_hBS1TM8zCmHjAxBm0iaTtIQWNaqViyNrYblfnYX64SuvQKUh0rV2L3vcX7mvyKZY1Y-BPH8LgY_dsUTlCOzUZJNWi_wbLQ8ImFWRcjRLPuFFWw8uNqP1PWwRzDTZfKTO5Fa0ouwhl3QHzPIC14z7CJxZ1ZUfhiSgS4SPfjtlJJSErGZIVrK-rNNYQ"
+            title={t('products.supplements.s3Title')}
+            category={t('products.supplementsBadge')}
+            description={t('products.supplements.s3Desc')}
+            features={tList('products.supplements.s3Features')}
+            detailsLabel={t('products.products.details')}
+            accent="teal"
+          />
+        </div>
       </section>
 
       {/* Software Showcase Section */}
@@ -84,9 +120,6 @@ export const Products: React.FC = () => {
             </div>
             <div className="flex flex-wrap gap-4">
               <Button variant="secondary" size="lg">{t('products.requestDemo')}</Button>
-              <Button variant="ghost" className="text-white hover:bg-white/10" size="lg">
-                <Play className="w-5 h-5 mr-2" /> {t('products.videoTour')}
-              </Button>
             </div>
           </div>
           <div className="relative bg-slate-800 min-h-[400px] flex items-center justify-center p-12 overflow-hidden">
