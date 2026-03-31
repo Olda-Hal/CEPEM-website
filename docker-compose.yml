@@ -17,11 +17,14 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: cepem-backend
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "${BACKEND_PORT:-8001}:8000"
     environment:
       - PYTHONUNBUFFERED=1
       - APP_HOST=${APP_HOST:-http://localhost}
+      - DATABASE_API_BASE_URL=${DATABASE_API_BASE_URL:-http://host.docker.internal:5001}
       - CORS_ALLOW_ORIGINS=${CORS_ALLOW_ORIGINS:-http://localhost:3001,http://127.0.0.1:3001}
       - CORS_ALLOW_METHODS=${CORS_ALLOW_METHODS:-*}
       - CORS_ALLOW_HEADERS=${CORS_ALLOW_HEADERS:-*}
