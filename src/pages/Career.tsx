@@ -1,25 +1,28 @@
 import React from 'react';
 import { motion } from 'motion/react';
-
-const positions = [
-  {
-    title: 'Lekar/ka preventivni mediciny',
-    location: 'Praha',
-    type: 'Plny uvazek',
-  },
-  {
-    title: 'Specialista/ka laboratorni diagnostiky',
-    location: 'Brno',
-    type: 'Plny uvazek',
-  },
-  {
-    title: 'Koordinator/ka pece o klienty',
-    location: 'Hybrid',
-    type: 'Plny uvazek',
-  },
-];
+import { useI18n } from '../i18n/I18nProvider';
 
 export const Career: React.FC = () => {
+  const { t } = useI18n();
+
+  const positions = [
+    {
+      title: t('career.positions.p1Title'),
+      location: t('career.positions.p1Location'),
+      type: t('career.positions.p1Type'),
+    },
+    {
+      title: t('career.positions.p2Title'),
+      location: t('career.positions.p2Location'),
+      type: t('career.positions.p2Type'),
+    },
+    {
+      title: t('career.positions.p3Title'),
+      location: t('career.positions.p3Location'),
+      type: t('career.positions.p3Type'),
+    },
+  ];
+
   return (
     <div className="pt-32 pb-20 px-6 max-w-5xl mx-auto">
       <motion.section
@@ -28,12 +31,11 @@ export const Career: React.FC = () => {
         className="space-y-8"
       >
         <span className="inline-flex items-center rounded-full bg-teal-50 text-teal-700 px-3 py-1 text-xs font-bold uppercase tracking-widest">
-          Kariera
+          {t('career.badge')}
         </span>
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900">Pridat se k CPM</h1>
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900">{t('career.title')}</h1>
         <p className="text-lg text-slate-600 leading-relaxed max-w-3xl">
-          Stavime tym lidi, kteri chteji realne zlepsovat zdravotni vysledky klientu. Nabizime moderni prostredi,
-          smysluplnou praci a prostor pro rust.
+          {t('career.description')}
         </p>
       </motion.section>
 

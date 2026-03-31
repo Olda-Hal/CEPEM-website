@@ -1,15 +1,18 @@
 import React from 'react';
+import { useI18n } from '../i18n/I18nProvider';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const { t } = useI18n();
+
   const footerLinks = [
-    { id: 'about', label: 'O nas' },
-    { id: 'career', label: 'Kariera' },
-    { id: 'gdpr', label: 'GDPR' },
-    { id: 'contact', label: 'Kontakt' },
+    { id: 'about', label: t('footer.about') },
+    { id: 'career', label: t('footer.career') },
+    { id: 'gdpr', label: t('footer.gdpr') },
+    { id: 'contact', label: t('footer.contact') },
   ];
 
   return (
@@ -31,7 +34,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           ))}
         </div>
         <div className="opacity-80">
-          © 2026 Centra Preventivni Mediciny (CPM). Vsechna prava vyhrazena.
+          {t('footer.rights')}
         </div>
       </div>
     </footer>

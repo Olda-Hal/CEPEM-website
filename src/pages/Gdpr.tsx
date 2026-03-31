@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { useI18n } from '../i18n/I18nProvider';
 
 export const Gdpr: React.FC = () => {
+  const { t } = useI18n();
+
   return (
     <div className="pt-32 pb-20 px-6 max-w-4xl mx-auto">
       <motion.section
@@ -10,27 +13,26 @@ export const Gdpr: React.FC = () => {
         className="space-y-8"
       >
         <span className="inline-flex items-center rounded-full bg-slate-100 text-slate-700 px-3 py-1 text-xs font-bold uppercase tracking-widest">
-          GDPR
+          {t('gdpr.badge')}
         </span>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">Zpracovani osobnich udaju</h1>
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">{t('gdpr.title')}</h1>
         <p className="text-slate-600 leading-relaxed">
-          Vasim osobnim udajum venujeme maximalni peci. Zpracovavame je vyhradne v rozsahu nutnem pro poskytovani
-          zdravotnich sluzeb a plneni pravnich povinnosti.
+          {t('gdpr.description')}
         </p>
       </motion.section>
 
       <section className="mt-12 space-y-6 text-slate-700">
         <div className="rounded-xl bg-slate-50 border border-slate-200 p-6">
-          <h2 className="font-bold text-slate-900 mb-2">Co zpracovavame</h2>
-          <p className="text-sm">Identifikacni, kontaktni a zdravotni udaje nutne pro objednani a poskytovani pece.</p>
+          <h2 className="font-bold text-slate-900 mb-2">{t('gdpr.section1Title')}</h2>
+          <p className="text-sm">{t('gdpr.section1Description')}</p>
         </div>
         <div className="rounded-xl bg-slate-50 border border-slate-200 p-6">
-          <h2 className="font-bold text-slate-900 mb-2">Pravni zaklad</h2>
-          <p className="text-sm">Plneni smlouvy, pravni povinnosti a opravnene zajmy v souladu s GDPR.</p>
+          <h2 className="font-bold text-slate-900 mb-2">{t('gdpr.section2Title')}</h2>
+          <p className="text-sm">{t('gdpr.section2Description')}</p>
         </div>
         <div className="rounded-xl bg-slate-50 border border-slate-200 p-6">
-          <h2 className="font-bold text-slate-900 mb-2">Vase prava</h2>
-          <p className="text-sm">Mate pravo na pristup, opravu, omezeni zpracovani i podani stiznosti u dozoroveho uradu.</p>
+          <h2 className="font-bold text-slate-900 mb-2">{t('gdpr.section3Title')}</h2>
+          <p className="text-sm">{t('gdpr.section3Description')}</p>
         </div>
       </section>
     </div>

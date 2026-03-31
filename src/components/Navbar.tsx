@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from './ui/Button';
 import { cn } from '@/src/lib/utils';
+import { useI18n } from '../i18n/I18nProvider';
 
 interface NavbarProps {
   activePage: string;
@@ -8,11 +9,13 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ activePage, onPageChange }) => {
+  const { language, setLanguage, availableLanguages, t } = useI18n();
+
   const navItems = [
-    { id: 'home', label: 'Domů' },
-    { id: 'clinics', label: 'Kliniky' },
-    { id: 'reservation', label: 'Rezervace' },
-    { id: 'products', label: 'Produkty' },
+    { id: 'home', label: t('nav.home') },
+    { id: 'clinics', label: t('nav.clinics') },
+    { id: 'reservation', label: t('nav.reservation') },
+    { id: 'products', label: t('nav.products') },
   ];
 
   return (
@@ -22,7 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onPageChange }) => {
           className="text-xl font-bold tracking-tighter text-slate-900 uppercase cursor-pointer"
           onClick={() => onPageChange('home')}
         >
-          Centra preventivní medicíny
+          {t('nav.brand')}
         </div>
         
         <div className="hidden md:flex items-center space-x-8 text-sm font-semibold">
@@ -42,13 +45,32 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onPageChange }) => {
           ))}
         </div>
 
-        <div className="flex items-center">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{t('nav.languageLabel')}</span>
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value as typeof language)}
+              className={cn(
+                'rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-700',
+                'focus:outline-none focus:ring-2 focus:ring-cyan-600/30',
+              )}
+              aria-label={t('nav.languageLabel')}
+            >
+              {availableLanguages.map((lang) => (
+                <option key={lang.code} value={lang.code}>
+                  {lang.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <Button 
             variant="secondary" 
             size="sm"
             onClick={() => onPageChange('reservation')}
           >
-            Rezervovat
+            {t('nav.bookNow')}
           </Button>
         </div>
       </div>

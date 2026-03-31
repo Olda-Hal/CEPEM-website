@@ -2,10 +2,11 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import { MapPin, Building2, Search, AlertCircle } from 'lucide-react';
 import { websiteApi, type Clinic } from '../lib/api';
+import { useI18n } from '../i18n/I18nProvider';
 
-function formatAddress(clinic: Clinic): string {
+function formatAddress(clinic: Clinic, fallback: string): string {
   if (!clinic.address) {
-    return 'Adresa není k dispozici';
+    return fallback;
   }
 
   const parts = [
@@ -15,10 +16,11 @@ function formatAddress(clinic: Clinic): string {
     clinic.address.country,
   ].filter(Boolean);
 
-  return parts.length > 0 ? parts.join(', ') : 'Adresa není k dispozici';
+  return parts.length > 0 ? parts.join(', ') : fallback;
 }
 
 export const Clinics: React.FC = () => {
+  const { t } = useI18n();
   const [clinics, setClinics] = useState<Clinic[]>([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
@@ -37,7 +39,7 @@ export const Clinics: React.FC = () => {
         }
       } catch (err) {
         if (mounted) {
-          setError(err instanceof Error ? err.message : 'Nepodařilo se načíst kliniky.');
+          setError(err instanceof Error ? err.message : t('clinics.loadError'));
         }
       } finally {
         if (mounted) {
@@ -80,10 +82,10 @@ export const Clinics: React.FC = () => {
     <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto">
       <section className="mb-12">
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-slate-800 mb-4">
-          Naše kliniky
+          {t('clinics.title')}
         </h1>
         <p className="text-slate-600 text-lg max-w-3xl leading-relaxed mb-8">
-          Přehled klinik je načítán živě z DatabaseAPI. Vyhledávejte podle názvu nebo adresy.
+          {t('clinics.description')}
         </p>
 
         <div className="relative max-w-xl">
@@ -92,7 +94,7 @@ export const Clinics: React.FC = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-12 pr-4 py-4 rounded-xl bg-slate-100 border-none focus:ring-2 focus:ring-cyan-600/40 focus:bg-white transition-all"
-            placeholder="Hledat kliniku nebo město..."
+            placeholder={t('clinics.searchPlaceholder')}
             type="text"
           />
         </div>
@@ -100,7 +102,7 @@ export const Clinics: React.FC = () => {
 
       {loading && (
         <div className="rounded-xl border border-slate-200 bg-slate-50 p-8 text-slate-600">
-          Načítám kliniky z databáze...
+          {t('clinics.loading')}
         </div>
       )}
 
@@ -127,7 +129,7 @@ export const Clinics: React.FC = () => {
                 </div>
                 {clinic.companyIco && (
                   <span className="text-[10px] font-bold tracking-wider uppercase bg-slate-100 text-slate-500 px-2 py-1 rounded">
-                    ICO {clinic.companyIco}
+                    {t('clinics.icoPrefix')} {clinic.companyIco}
                   </span>
                 )}
               </div>
@@ -139,14 +141,14 @@ export const Clinics: React.FC = () => {
 
               <div className="flex items-start gap-2 text-slate-600 text-sm">
                 <MapPin className="w-4 h-4 mt-0.5 text-cyan-600" />
-                <span>{formatAddress(clinic)}</span>
+                <span>{formatAddress(clinic, t('clinics.addressUnavailable'))}</span>
               </div>
             </motion.article>
           ))}
 
           {filteredClinics.length === 0 && (
             <div className="md:col-span-2 xl:col-span-3 rounded-xl border border-slate-200 bg-slate-50 p-8 text-slate-600">
-              Pro zadaný filtr nebyla nalezena žádná klinika.
+              {t('clinics.noResults')}
             </div>
           )}
         </section>

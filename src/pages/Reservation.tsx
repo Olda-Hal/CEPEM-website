@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import { AlertCircle, Calendar as CalendarIcon, Clock3, Hospital, PhoneCall, Stethoscope } from 'lucide-react';
 import { websiteApi, type AvailabilityResponse, type BookingOptions, type Clinic } from '../lib/api';
+import { useI18n } from '../i18n/I18nProvider';
 
 function nextBusinessDate(daysFromNow: number): string {
   const d = new Date();
@@ -10,6 +11,7 @@ function nextBusinessDate(daysFromNow: number): string {
 }
 
 export const Reservation: React.FC = () => {
+  const { t } = useI18n();
   const [clinics, setClinics] = useState<Clinic[]>([]);
   const [bookingOptions, setBookingOptions] = useState<BookingOptions | null>(null);
   const [availability, setAvailability] = useState<AvailabilityResponse | null>(null);
@@ -40,7 +42,7 @@ export const Reservation: React.FC = () => {
         }
       } catch (err) {
         if (mounted) {
-          setError(err instanceof Error ? err.message : 'Nepodařilo se načíst kliniky.');
+          setError(err instanceof Error ? err.message : t('reservation.loadClinicsError'));
         }
       } finally {
         if (mounted) {
@@ -75,7 +77,7 @@ export const Reservation: React.FC = () => {
         setSelectedServiceId(data.services[0]?.id ?? null);
       } catch (err) {
         if (mounted) {
-          setError(err instanceof Error ? err.message : 'Nepodařilo se načíst služby kliniky.');
+          setError(err instanceof Error ? err.message : t('reservation.loadServicesError'));
         }
       } finally {
         if (mounted) {
@@ -109,7 +111,7 @@ export const Reservation: React.FC = () => {
         setAvailability(data);
       } catch (err) {
         if (mounted) {
-          setError(err instanceof Error ? err.message : 'Nepodařilo se načíst volné časy.');
+          setError(err instanceof Error ? err.message : t('reservation.loadSlotsError'));
         }
       } finally {
         if (mounted) {
@@ -147,10 +149,10 @@ export const Reservation: React.FC = () => {
     <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto">
       <section className="mb-12">
         <h1 className="text-5xl md:text-6xl font-extrabold text-slate-800 tracking-tight mb-4">
-          Volné termíny
+          {t('reservation.title')}
         </h1>
         <p className="text-slate-600 text-lg max-w-4xl">
-          Termíny jsou sloučené napříč všemi místnostmi kliniky. Rezervaci provádí pouze autorizovaný pracovník po telefonu.
+          {t('reservation.description')}
         </p>
       </section>
 
@@ -169,7 +171,7 @@ export const Reservation: React.FC = () => {
         >
           <section>
             <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <Hospital className="w-5 h-5 text-cyan-600" /> Klinika
+              <Hospital className="w-5 h-5 text-cyan-600" /> {t('reservation.clinic')}
             </h2>
             <select
               value={selectedClinicId ?? ''}
@@ -187,7 +189,7 @@ export const Reservation: React.FC = () => {
 
           <section>
             <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <Stethoscope className="w-5 h-5 text-cyan-600" /> Služba
+              <Stethoscope className="w-5 h-5 text-cyan-600" /> {t('reservation.service')}
             </h2>
             <select
               value={selectedServiceId ?? ''}
@@ -204,7 +206,7 @@ export const Reservation: React.FC = () => {
           </section>
 
           <section>
-            <label className="text-sm font-bold text-slate-700 block mb-2">Datum</label>
+            <label className="text-sm font-bold text-slate-700 block mb-2">{t('reservation.date')}</label>
             <input
               value={date}
               onChange={(e) => setDate(e.target.value)}
@@ -215,12 +217,12 @@ export const Reservation: React.FC = () => {
 
           <section>
             <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <Clock3 className="w-5 h-5 text-cyan-600" /> Volné časy
+              <Clock3 className="w-5 h-5 text-cyan-600" /> {t('reservation.freeTimes')}
             </h3>
 
             {loadingAvailability && (
               <div className="rounded-xl border border-slate-200 bg-white p-5 text-slate-600">
-                Načítám dostupné termíny z DatabaseAPI...
+                {t('reservation.loadingAvailability')}
               </div>
             )}
 
@@ -239,7 +241,7 @@ export const Reservation: React.FC = () => {
 
             {!loadingAvailability && joinedSlots.length === 0 && (
               <div className="rounded-xl border border-slate-200 bg-white p-5 text-slate-600">
-                Pro vybranou kliniku nejsou v tento den dostupné žádné volné sloty.
+                {t('reservation.noSlots')}
               </div>
             )}
           </section>
@@ -247,24 +249,24 @@ export const Reservation: React.FC = () => {
 
         <aside className="lg:col-span-4 space-y-6">
           <div className="rounded-2xl bg-white border border-slate-100 p-6 shadow-sm">
-            <h3 className="text-xl font-black text-slate-800 mb-4">Souhrn</h3>
+            <h3 className="text-xl font-black text-slate-800 mb-4">{t('reservation.summary')}</h3>
             <div className="space-y-4 text-sm text-slate-700">
-              <p className="flex items-center gap-2"><Hospital className="w-4 h-4 text-cyan-600" /> {selectedClinic?.name || '-'}</p>
-              <p className="flex items-center gap-2"><Stethoscope className="w-4 h-4 text-cyan-600" /> {bookingOptions?.services.find((s) => s.id === selectedServiceId)?.name || '-'}</p>
-              <p className="flex items-center gap-2"><CalendarIcon className="w-4 h-4 text-cyan-600" /> {date || '-'}</p>
+              <p className="flex items-center gap-2"><Hospital className="w-4 h-4 text-cyan-600" /> {selectedClinic?.name || t('reservation.unknown')}</p>
+              <p className="flex items-center gap-2"><Stethoscope className="w-4 h-4 text-cyan-600" /> {bookingOptions?.services.find((s) => s.id === selectedServiceId)?.name || t('reservation.unknown')}</p>
+              <p className="flex items-center gap-2"><CalendarIcon className="w-4 h-4 text-cyan-600" /> {date || t('reservation.unknown')}</p>
             </div>
           </div>
 
           <div className="rounded-2xl bg-cyan-50 border border-cyan-100 p-6 text-sm text-slate-700">
-            <p className="font-bold text-slate-800 mb-2 flex items-center gap-2"><PhoneCall className="w-4 h-4 text-cyan-700" /> Objednání pouze telefonicky</p>
+            <p className="font-bold text-slate-800 mb-2 flex items-center gap-2"><PhoneCall className="w-4 h-4 text-cyan-700" /> {t('reservation.phoneOnlyTitle')}</p>
             <p>
-              Pro vytvoření rezervace volejte kliniku na číslo{' '}
+              {t('reservation.phoneOnlyPrefix')}{' '}
               {selectedClinic?.phoneNumber ? (
                 selectedClinic.phoneNumber
               ) : (
-                <span className="font-extrabold text-red-700">NENI DOSTUPNE</span>
+                <span className="font-extrabold text-red-700">{t('reservation.phoneOnlyUnavailable')}</span>
               )}
-              . Online rezervace z webu není povolená.
+              {t('reservation.phoneOnlySuffix')}
             </p>
           </div>
         </aside>
