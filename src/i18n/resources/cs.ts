@@ -5,7 +5,6 @@ const cs = {
     clinics: 'Kliniky',
     reservation: 'Rezervace',
     products: 'Produkty',
-    bookNow: 'Rezervovat',
     languageLabel: 'Jazyk',
   },
   footer: {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from './ui/Button';
 import { cn } from '@/src/lib/utils';
 import { useI18n } from '../i18n/I18nProvider';
 
@@ -64,14 +63,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onPageChange }) => {
               ))}
             </select>
           </div>
-
-          <Button 
-            variant="secondary" 
-            size="sm"
-            onClick={() => onPageChange('reservation')}
-          >
-            {t('nav.bookNow')}
-          </Button>
         </div>
       </div>
     </nav>
